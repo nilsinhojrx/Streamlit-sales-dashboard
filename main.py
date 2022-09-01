@@ -5,7 +5,6 @@ st.set_page_config(page_title="Sales Dashboard",
                     page_icon=":bar_chart:",
                     layout="wide"
 )
-
 @st.cache
 def get_data():
     data = loadData("supermarkt_sales.xlsx")
@@ -49,13 +48,12 @@ st.markdown("##")
 
 #Top KPI's
 left_column, middle_column, right_column = st.columns(3)
-
 try:
     total_sales = int(data_selection["Total"].sum())
     average_rating = round(data_selection["Rating"].mean(), 1)
     average_sales_by_transaction = round(data_selection["Total"].mean(), 2)
     star_rating = ":star:" * int(round(average_rating, 0))
-
+    
     with left_column:
         st.subheader("Total Sales:")
         st.subheader(f"US $ {total_sales:,}")
@@ -65,17 +63,14 @@ try:
     with right_column:
         st.subheader("Average Sales Per Transaction")
         st.subheader(f"US $ {average_sales_by_transaction}")
+        
 except ValueError:
     with left_column:
         st.subheader("Total Sales:")
-        #st.subheader(f"US $ {total_sales:,}")
     with middle_column:
         st.subheader("Average Rating")
-        #st.subheader(f"{average_rating} {star_rating}")
     with right_column:
         st.subheader("Average Sales Per Transaction")
-        #st.subheader(f"US $ {average_sales_by_transaction}")
-
 
 st.markdown("---")
 
@@ -101,7 +96,5 @@ fig_hour_sales.update_layout(
 
 #-- Columns to display charts
 left_column, right_column = st.columns(2)
-#left_column.header("Sales By Hour")
 left_column.plotly_chart(fig_hour_sales, use_container_width=True)
-#right_column.header("Sales By Product Line")
 right_column.plotly_chart(fig_product_sales, use_container_width=True)
