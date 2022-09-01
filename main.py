@@ -13,6 +13,7 @@ def get_data():
 DATA = get_data()
 
 # ----- Side Bar -------
+st.sidebar.header("Filter Options")
 city = st.sidebar.multiselect(
     "Select the City:",
     options=DATA["City"].unique(),
