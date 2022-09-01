@@ -31,6 +31,7 @@ def loadData(path):
     df["Date"] = pd.to_datetime(df["Date"], format= "%d/%m/%Y")
     df["Month"] = pd.to_datetime(df["Date"], format= "%d/%m/%Y").dt.month
     df["Month"] = df["Month"].apply(translate_month)
+    df.drop("Time", axis=1, inplace=True)
     return df
 
 # Bar Chart: sales by Product Line
